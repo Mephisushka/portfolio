@@ -1,0 +1,1323 @@
+:root {
+  --bg: #f4f4f4;
+  --surface: #ffffff;
+  --card: #e4e4e4;
+  --text: #000000;
+  --text-strong: #242329;
+  --line: #c7c7cc;
+  --tile-border: #d8d7dd;
+  --hover: #8e8e93; /* цвет ховера плиток, потом заменить на акцентный */
+  --radius-card: 24px;
+  --radius-btn: 18px;
+  --shadow: 0 4px 125px rgba(53, 53, 53, 0.1);
+  --gutter: 100px;
+  --content: 1240px;
+  --nav-pad: 64px; /* боковые отступы навбара и футера главной */
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Rubik", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; text-decoration: none; }
+img, video { display: block; max-width: 100%; }
+
+/* ===== Главная (редизайн): белый фон, тёмно-синий текст ===== */
+.theme-v2 {
+  --bg: #ffffff;
+  --text: #001a30;
+  --text-strong: #001a30;
+  --text-muted: #3c566c;
+  --line: #d8d7dd;
+  --tile-border: rgb(124 124 124 / .2);
+  --accent: #005aab;
+  --media-bg: #f5f6f7; /* подложка под видео на странице кейса */
+  --hover: var(--accent); /* ховер текста в плитках */
+}
+
+/* Навбар */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px var(--nav-pad);
+}
+
+.nav__person {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav__avatar {
+  position: relative;
+  flex-shrink: 0;
+  width: 62px;
+  height: 63.34px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Фото кадрировано как в макете: 62×134, смещено вверх на 7px */
+.nav__avatar img {
+  position: absolute;
+  left: 0;
+  top: -7.14px;
+  width: 62px;
+  height: 134.26px;
+  max-width: none;
+  object-fit: cover;
+}
+
+/* Правая часть навбара/футера: ссылки + CV.pdf, между группами 100px */
+.nav__right {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+
+
+/* Ховер как в Framer Simple Footer → NavLink: справа от текста проявляется
+   иконка (opacity 0→1, scale .9→1, .6s). Иконка стоит абсолютно,
+   поэтому ссылки не сдвигаются относительно макета. */
+.nav__links a,
+.nav__cv {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav__icon {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-left: 4px;
+  opacity: 0;
+  transform: translateY(-50%) scale(.9);
+  transition:
+    opacity .6s cubic-bezier(.12, .23, .5, 1),
+    transform .6s cubic-bezier(.12, .23, .5, 1);
+  pointer-events: none;
+}
+
+.nav__links a:hover .nav__icon,
+.nav__links a:focus-visible .nav__icon,
+.nav__cv:hover .nav__icon,
+.nav__cv:focus-visible .nav__icon,
+.activity__more:hover .nav__icon,
+.activity__more:focus-visible .nav__icon {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+
+/* Бургер и мобильное меню — только на телефоне (≤720px), на десктопе скрыты */
+.nav__burger, .mmenu { display: none; }
+
+.divider {
+  width: min(1440px - 2 * var(--nav-pad), 100% - 2 * var(--nav-pad));
+  height: 1px;
+  margin: 0 auto;
+}
+
+/* Интро над кейсами */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.intro__title { font-size: 58px; font-weight: 700; }
+
+.intro__lead {
+  max-width: 636px;
+  font-size: 20px;
+  color: var(--text-muted);
+}
+
+/* Теги навыков под подводкой */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tag {
+  padding: 8px 18px;
+  font-size: 14px;
+  color: var(--text-muted);
+  background: var(--media-bg);
+  border-radius: 32px;
+}
+
+/* Профессиональная активность */
+.activity {
+  display: grid;
+  grid-template-columns: minmax(0, 822fr) minmax(0, 404fr);
+  gap: 14px;
+}
+
+.activity__card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.activity__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 24px;
+}
+
+.activity__meta  { font-size: 16px; }
+.activity__label { font-size: 16px; color: var(--text-muted); }
+
+/* «Смотреть полную версию» под докладом: ховер как у ссылок навбара (стрелка проявляется справа) */
+.activity__more {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.activity__title {
+  font-size: 24px;
+  font-weight: 600;
+  transition: color .25s ease;
+}
+
+/* Скриншот статьи: показан верх, низ обрезан скруглённой рамкой */
+.activity__card--article { padding: 31.66px 21px 32px; }
+.activity__card--article .activity__text { padding-left: 11px; padding-right: 11px; }
+
+.activity__shot {
+  height: 396.34px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.activity__shot img {
+  width: 100%;
+  height: auto;
+  transition: transform .5s ease;
+}
+
+.activity__card--article:hover .activity__title,
+.activity__card--article:focus-visible .activity__title { color: var(--hover); }
+.activity__card--article:hover .activity__shot img { transform: scale(1.02); }
+
+/* Cinematic video (по мотивам Framer-компонента Cinematic Video) */
+.cine {
+  position: relative;
+  height: 424px;
+  background: #0080ff;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transform: translateZ(0); /* скругление не пропадает во время проигрывания в Safari */
+}
+
+.cine__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cine__overlay {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+  transition: opacity .8s ease-in-out;
+}
+
+/* Во время просмотра подпись гаснет с задержкой, на паузе сразу возвращается */
+.cine[data-state="playing"] .cine__overlay { opacity: 0; transition-delay: 1.5s; }
+.cine[data-state="playing"] .cine__overlay:focus-visible { opacity: 1; transition-delay: 0s; }
+
+.cine__gradient {
+  position: absolute;
+  inset: auto 0 0;
+  height: 60%;
+  background: linear-gradient(to top, rgb(0 0 0 / .5), transparent);
+}
+
+.cine__label {
+  position: absolute;
+  left: 32px;
+  bottom: 32px;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+.cine__label--play img { display: block; width: 139px; height: 73px; }
+
+.cine__label--pause {
+  font-family: "Bebas Neue", "Rubik", sans-serif;
+  font-size: 100px;
+  line-height: 73px;
+  height: 73px;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+/* Смена подписи: старая уезжает вверх, новая поднимается снизу */
+.cine[data-state="paused"]  .cine__label--pause,
+.cine[data-state="playing"] .cine__label--play { opacity: 0; transform: translateY(-10px); }
+.cine[data-state="paused"]  .cine__label--play,
+.cine[data-state="playing"] .cine__label--pause { opacity: 1; transform: none; }
+
+/* Футер */
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 32px var(--nav-pad);
+}
+
+.site-footer__copy {
+  font-size: 16px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Sections */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 64px var(--gutter);
+  scroll-margin-top: 0;
+}
+
+.section__title { font-size: 36px; font-weight: 500; line-height: 44px; }
+
+/* Cases */
+.cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 241px);
+  gap: 14px;
+}
+
+.case {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  background: var(--bg);
+  outline: 1px solid var(--tile-border); /* outline рисуется поверх видео */
+  outline-offset: -1px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.case--tall   { grid-column: 1;          grid-row: 1 / span 3; }
+.case--school { grid-column: 2;          grid-row: 1 / span 2; }
+.case--ds     { grid-column: 3;          grid-row: 1 / span 2; }
+.case--wide   { grid-column: 2 / span 2; grid-row: 3; }
+
+/* Видео на всю плитку, текст поверх. Ролики экспортируются в пропорциях плитки */
+.case__video {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.case__video:not([src]) { display: none; }
+
+/* Растворение низа плитки с видео в фон страницы */
+.case:has(.case__video[src])::before,
+.case:has(.case__video[src])::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 55%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Размытие, которое плавно нарастает книзу */
+.case:has(.case__video[src])::before {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  mask-image: linear-gradient(to top, #000 35%, transparent);
+  -webkit-mask-image: linear-gradient(to top, #000 35%, transparent);
+}
+
+/* Заливка цветом фона поверх размытия */
+.case:has(.case__video[src])::after {
+  background: linear-gradient(to top,
+    var(--bg) 25%,
+    color-mix(in srgb, var(--bg) 85%, transparent) 50%,
+    color-mix(in srgb, var(--bg) 0%, transparent));
+}
+
+.case__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.case__title {
+  font-size: 24px;
+  font-weight: 600;
+  transition: color .25s ease;
+}
+
+.case:hover .case__title,
+.case:focus-visible .case__title { color: var(--hover); }
+.case__desc  { font-size: 16px; }
+.theme-v2 .case__desc,
+.theme-v2 .job__role p { color: var(--text-muted); }
+
+/* Experience */
+.job {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.job:last-child { border-bottom: 0; }
+
+.job__years { font-size: 16px; white-space: nowrap; }
+
+.job__body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 912px;
+  max-width: 100%;
+}
+
+.job__role {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.job__company { font-size: 22px; font-weight: 600; }
+
+.job__about { font-size: 16px; width: 340px; flex-shrink: 0; }
+
+/* ===== Внутренняя страница кейса ===== */
+
+.case-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: calc(var(--content) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 64px var(--gutter);
+}
+
+/* Заголовок слева, факты справа */
+.case-hero__top {
+  display: flex;
+  align-items: flex-end; /* как в макете: цифра выровнена по нижней строке заголовка */
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.case-hero__head {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.case-hero__meta { font-size: 18px; color: var(--text-muted); }
+
+.case-hero__title { font-size: 34px; font-weight: 700; }
+
+.accent { color: var(--accent); }
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 0 0 340px;
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fact__title { font-size: 20px; font-weight: 700; color: var(--accent); }
+.fact__text  { font-size: 16px; color: var(--text-muted); }
+
+/* Баннер кейса: контейнер повторяет пропорции видео (2480×1000) */
+.case-hero__media {
+  aspect-ratio: 2480 / 1000;
+  background: var(--media-bg);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.case-hero__media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Контекст / Проблема / ... */
+.story__row {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--tile-border);
+  font-size: 18px;
+}
+.story__row:last-child { border-bottom: 0; }
+
+.story dt {
+  flex: 0 0 auto;
+  min-width: 124px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.story dd {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* Флоу до/после: видео играет по ховеру, подпись лежит внизу карточки,
+   низ видео растворяется в фон карточки */
+.section__head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section__hint { font-size: 16px; color: var(--text-muted); }
+.section__hint--lead { max-width: 800px; } /* описание под заголовком блока (Life & Medical) */
+.hint--touch { display: none; }
+@media (hover: none) {
+  .hint--hover { display: none; }
+  .hint--touch { display: inline; }
+}
+
+.flows {
+  display: flex;
+  gap: 48px;
+}
+
+.flow {
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+}
+
+.flow__media {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 400px;
+  padding: 32px;
+  --flow-bg: var(--media-bg);
+  background: var(--flow-bg);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+}
+/* карточка с видео — белая, под цвет фона сайта; пустые заглушки остаются серыми */
+.flow__media:has(.flow__video) { --flow-bg: var(--bg); border: 1px solid var(--line); }
+.flow__media:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.flow__video {
+  position: absolute;
+  top: 0;
+  left: -3px; /* в записях экрана по краям 1–2px тёмной рамки — уводим её за край карточки */
+  z-index: -2;
+  width: calc(100% + 6px);
+  max-width: none;
+  height: 100%;
+  object-fit: contain; /* ролики разных пропорций показываются целиком, без обрезки */
+  object-position: top;
+}
+
+.flow__media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 60%;
+  z-index: -1;
+  background: linear-gradient(to top,
+    var(--flow-bg) 45%,
+    color-mix(in srgb, var(--flow-bg) 0%, transparent));
+  pointer-events: none;
+}
+
+.flow__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flow__label { font-size: 24px; font-weight: 600; }
+.flow__text  { font-size: 18px; }
+
+/* Пустой баннер (видео ещё нет) — высота как в макете */
+.case-hero__media--empty { aspect-ratio: auto; height: 491px; }
+.case-hero__media--ds { height: 400px; }
+
+/* Узкий вариант блока истории (дизайн-система): подписи 16px, текст до 700px */
+.story--narrow dt { min-width: 115px; font-size: 16px; }
+.story--narrow dd { max-width: 700px; }
+
+.section__lead { font-size: 18px; }
+
+/* Принципы / шаблоны дизайн-системы: плитка с подписью по центру + текст под ней */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px;
+  align-items: start;
+}
+
+.principle {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  font-size: 18px;
+}
+
+.principle__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  padding: 32px;
+  background: var(--card);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+
+/* Life & Medical: подписи в блоке истории шире (до 187px) */
+.story--lm dt { min-width: 187px; }
+
+.lm-flow { display: flex; flex-direction: column; gap: 10px; }
+.lm-row  { display: flex; gap: inherit; }
+.lm-flow--life { gap: 14px; } /* в макете у Life classic отступы 14, у Medical — 10 */
+
+.lm-card__label { font-size: 16px; }
+
+/* Схема шагов: картинка справа, подпись в левом нижнем углу */
+.lm-scheme {
+  position: relative;
+  height: 243px;
+  border: 1px solid var(--tile-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.lm-scheme img { position: absolute; max-width: none; height: auto; }
+.lm-scheme--life img    { left: 187px; top: 18.67px; width: 1040px; } /* по центру по вертикали, как в макете */
+.lm-scheme--medical img { left: 416.64px; top: 10.33px; width: 697.37px; }
+.lm-scheme .lm-card__label {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 253.5px;
+  padding: 24px;
+}
+
+/* Лендинг: серая плитка, скриншот прижат к низу */
+.lm-landing {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 0 0 388px;
+  height: 286px;
+  padding: 24px;
+  background: var(--media-bg);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.lm-landing img {
+  position: absolute;
+  left: 122px;
+  top: 24px;
+  width: 252px;
+  height: 262px;
+  max-width: none;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 6px 6px 0 0;
+}
+.lm-landing .lm-card__label { position: relative; max-width: 90px; }
+
+/* Персоны: карточки лесенкой, как в макете */
+.lm-personas {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 286px;
+  border: 1px solid var(--tile-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.lm-personas__title {
+  position: absolute;
+  left: 21.67px;
+  top: 21.67px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.lm-personas__text {
+  position: absolute;
+  left: 21.67px;
+  top: 50.33px;
+  width: 328px;
+  font-size: 16px;
+}
+.persona {
+  position: absolute;
+  width: 300px;
+  height: 128.1px;
+  max-width: none;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 24px rgb(0 0 0 / .06);
+}
+
+/* Этапы работы / драфты (по мотивам Framer CollapsingCards):
+   наведённая карточка раскрывается и показывает картинку, соседние сжимаются */
+.drafts {
+  display: flex;
+  gap: 14px;
+  height: 294px;
+}
+
+.draft {
+  display: flex;
+  align-items: flex-end;
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--media-bg);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex-grow .5s cubic-bezier(.3, 1.25, .5, 1); /* пружина с лёгким отскоком, как в оригинале */
+}
+.draft.is-active { flex-grow: 1.5; cursor: default; } /* в макете 518 px против 347 у соседних */
+.draft:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.draft__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 0 0 253.5px;
+  height: 100%;
+}
+
+.draft__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+}
+/* «Минусы» видны только у раскрытой карточки: блок плавно разворачивается по высоте */
+.draft__cons {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows .5s cubic-bezier(.3, 1.1, .5, 1), opacity .3s ease;
+}
+.draft__cons > .draft__group { min-height: 0; overflow: hidden; }
+.draft.is-active .draft__cons { grid-template-rows: 1fr; opacity: 1; transition-delay: .1s; }
+
+.draft__title { font-size: 18px; font-weight: 600; }
+.draft__text  { font-size: 16px; }
+
+.draft__media {
+  position: relative;
+  flex: 0 0 264.5px;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity .35s ease, transform .5s cubic-bezier(.3, 1.25, .5, 1);
+}
+.draft.is-active .draft__media { opacity: 1; transform: none; }
+
+/* как в макете: скриншот 264×252, прижат к низу карточки */
+.draft__media img {
+  position: absolute;
+  left: .5px;
+  bottom: 0;
+  width: 264px;
+  height: 252px;
+  max-width: none;
+  object-fit: cover;
+  object-position: top left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draft, .draft__media, .draft__cons { transition: none; }
+}
+
+/* Слайдер «Принципы системы» (анимация по мотивам Framer Flexible Accordion) */
+.slider {
+  display: flex;
+  gap: 32px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.slider__body {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+/* все слайды в одной ячейке — высота по самому длинному тексту */
+.slider__slides { display: grid; }
+
+.slide {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+.slide.is-active,
+.slide.is-leaving {
+  transition: opacity .385s cubic-bezier(.4, 0, .2, 1), transform .385s cubic-bezier(.4, 0, .2, 1);
+}
+.slide.is-active  { opacity: 1; transform: none; pointer-events: auto; }
+.slide.is-leaving { opacity: 0; transform: translateY(-7px); }
+
+.slide__title { font-size: 24px; font-weight: 600; }
+.slide__text  { font-size: 18px; }
+
+.slider__nav { display: flex; gap: 12px; }
+
+.slider__btn {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.slider__btn:hover  { opacity: .75; }
+.slider__btn:active { transform: scale(.94); }
+.slider__btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.slider__btn img { display: block; }
+
+.slider__media {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 280px;
+  overflow: hidden;
+  background: var(--media-bg);
+  border-radius: var(--radius-card);
+}
+
+/* как в макете: иллюстрация 706×398 по центру плитки высотой 280 (поля картинки обрезаются) */
+.slider__img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: auto;
+  height: 142.3%;
+  max-width: none;
+  translate: -50% -50%;
+  opacity: 0;
+  scale: 1.035;
+}
+.slider__img.is-active,
+.slider__img.is-leaving {
+  transition: opacity .55s cubic-bezier(.4, 0, .2, 1), scale .55s cubic-bezier(.4, 0, .2, 1);
+}
+.slider__img.is-active  { z-index: 1; opacity: 1; scale: 1; }
+.slider__img.is-leaving { opacity: 0; scale: 1.01; }
+
+@media (prefers-reduced-motion: reduce) {
+  .slide, .slider__img { transition: none !important; transform: none; scale: 1; }
+}
+
+/* «Как описываются компоненты»: карточки в пропорции видео 1200×600 */
+.principles--docs { gap: 32px; }
+.principles--docs .principle__media { height: auto; aspect-ratio: 2 / 1; }
+.principle__media--video { padding: 0; overflow: hidden; background: var(--media-bg); }
+.principle__media--video video { width: 100%; height: 100%; object-fit: cover; }
+
+/* Мини-карточка следующего кейса, собранная в HTML (как в макете: 120×147, повёрнута на −15°) */
+.next-case__peek--mini {
+  display: grid;
+  place-items: center;
+  width: 154px;
+  height: 173px;
+}
+
+.mini-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 120px;
+  height: 147.3px;
+  padding: 9.5px;
+  background: #fff;
+  border: .3px solid rgb(124 124 124 / .2);
+  border-radius: 7.13px;
+  overflow: hidden;
+  transform: rotate(-15deg);
+}
+
+.mini-card__shot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  max-width: none;
+}
+.mini-card__shot--home { width: 119.6px; height: 90px; transform: translate(calc(-50% - 1.46px), calc(-50% - 23.93px)); }
+.mini-card__shot--lm   { width: 124.6px; height: 191.2px; object-fit: cover; transform: translate(calc(-50% - .31px), calc(-50% + .72px)); }
+.mini-card__shot--sf   { z-index: -2; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); }
+
+.mini-card__text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4px;
+}
+
+/* белое растворение под текстом мини-карточки */
+.mini-card__text::before {
+  content: "";
+  position: absolute;
+  left: -18.5px;
+  right: -22px;
+  top: -43px;
+  bottom: -12px;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgb(255 255 255 / 0), #fff 45%);
+}
+
+.mini-card__title { font-size: 7.13px; font-weight: 600; }
+.mini-card__desc  { font-size: 4.75px; color: var(--text-muted); }
+
+.next-case { gap: 24px; }
+
+.next-case__label { font-size: 18px; }
+
+.next-case__card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);  position: relative;
+  overflow: hidden;
+}
+
+/* Превью следующего кейса (по мотивам Framer Expand On Hover List):
+   в покое спрятано и повёрнуто, по ховеру вылетает на место, как в макете —
+   выглядывает из-за верхнего края между заголовком и описанием */
+.next-case__peek {
+  position: absolute;
+  left: 29.4%;
+  top: -27px;
+  width: 154.5px;
+  height: auto;
+  max-width: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-40px, 70px) rotate(66deg) scale(.85);
+  transform-origin: 50% 100%;
+  transition:
+    opacity .7s ease,
+    transform 1s cubic-bezier(.22, 1, .36, 1); /* плавно, без перелёта */
+}
+
+.next-case__card:hover .next-case__peek,
+.next-case__card:focus-visible .next-case__peek {
+  opacity: 1;
+  transform: none;
+}
+
+.next-case__title {
+  flex: 1 1 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.next-case__right {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 18px;
+}
+.next-case__right p { flex: 1; }
+.next-case__right img { flex-shrink: 0; transition: transform .25s ease; }
+
+.next-case__card:hover .next-case__right img { transform: translateX(4px); }
+
+/* Tablet */
+@media (max-width: 1100px) {
+  .story--lm dt { min-width: 150px; }
+  /* схема: картинка во всю ширину, подпись под ней */
+  .lm-scheme { display: flex; flex-direction: column; gap: 16px; height: auto; padding: 24px 24px 0; }
+  .lm-scheme img, .lm-scheme--life img, .lm-scheme--medical img { position: static; width: 100%; }
+  .lm-scheme .lm-card__label { position: static; width: auto; padding: 0 0 24px; }
+  .section__lead br { display: none; }
+  :root { --gutter: 40px; }
+  :root { --nav-pad: 40px; }
+  .nav { padding-top: 24px; padding-bottom: 24px; }
+  .nav__right { gap: 48px; }
+  .nav__links { gap: 32px; }
+  .intro__title { font-size: 44px; }
+  .activity { grid-template-columns: 1fr; }
+  .cine { height: auto; aspect-ratio: 758 / 424; }
+  .activity__shot { height: 420px; }
+  .site-footer { flex-direction: column; align-items: flex-start; }
+  .job { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .job__body { width: 100%; }
+  .story__row { gap: 40px; }
+  .case-hero__top { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .facts { flex: none; flex-direction: row; flex-wrap: wrap; }
+  .fact { width: 340px; max-width: 100%; }
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  :root { --gutter: 16px; }
+  :root { --nav-pad: 16px; --radius-card: 16px; } /* на телефоне карточки скруглены на 16 */
+  .nav { padding-top: 16px; padding-bottom: 16px; }
+  .nav__person { gap: 12px; font-size: 16px; }
+  .nav .nav__links { display: none; }
+  .nav__icon { display: none; } /* на телефоне нет ховера, а иконка у края вызывала бы скролл */
+  .activity__more .nav__icon { display: block; opacity: 1; transform: translateY(-50%); } /* у края её нет — показываем сразу */
+  .nav__right { font-size: 16px; }
+
+  /* Навбар на телефоне: CV сразу с иконкой, рядом бургер */
+  .nav { position: relative; z-index: 1001; } /* над открытым меню: остаются аватар, CV и крестик */
+  .nav .nav__right { gap: 16px; }
+  .nav .nav__cv .nav__icon {
+    display: block;
+    position: static;
+    margin-left: 4px;
+    opacity: 1;
+    transform: none;
+  }
+  .nav__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: -8px -8px -8px 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav__burger:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; border-radius: 8px; }
+
+  /* Бургер ⇄ крестик: линии сходятся в центр, затем поворачиваются (как в оригинале, 0,52 с) */
+  .nav__burger path { transform-box: view-box; transform-origin: 12px 12px; }
+  .nav__burger.is-active .burger__top { animation: burger-top-open .52s cubic-bezier(.65, 0, .35, 1) forwards; }
+  .nav__burger.is-active .burger__bot { animation: burger-bot-open .52s cubic-bezier(.65, 0, .35, 1) forwards; }
+  .nav__burger.is-active .burger__mid { animation: burger-mid-open .52s cubic-bezier(.65, 0, .35, 1) forwards; }
+  .nav__burger.was-active:not(.is-active) .burger__top { animation: burger-top-close .52s cubic-bezier(.65, 0, .35, 1); }
+  .nav__burger.was-active:not(.is-active) .burger__bot { animation: burger-bot-close .52s cubic-bezier(.65, 0, .35, 1); }
+  .nav__burger.was-active:not(.is-active) .burger__mid { animation: burger-mid-close .52s cubic-bezier(.65, 0, .35, 1); }
+
+  /* Пока меню открыто: страница не прокручивается, навбар — белый на тёмном */
+  body.menu-open { overflow: hidden; }
+  .nav a, .nav__burger { transition: color .35s ease; }
+  .nav .nav__cv .nav__icon { transition: filter .35s ease; }
+  body.menu-dark .nav a,
+  body.menu-dark .nav__burger { color: #fff; }
+  body.menu-dark .nav .nav__cv .nav__icon { filter: brightness(0) invert(1); }
+
+  /* Тёмный экран раскрывается кругом от кнопки и сворачивается обратно в неё */
+  .mmenu {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: calc(96px + 6vh) var(--nav-pad) 40px;
+    color: #fff;
+    background:
+      radial-gradient(520px 380px at 88% 12%, rgb(255 255 255 / .07), transparent 70%),
+      #212320;
+    outline: none;
+    clip-path: circle(0px at var(--ox, calc(100% - 36px)) var(--oy, 48px));
+    visibility: hidden;
+    transition:
+      clip-path .88s cubic-bezier(.4, 0, 1, 1),
+      visibility 0s linear .88s;
+  }
+  .mmenu.is-open {
+    clip-path: circle(150% at var(--ox, calc(100% - 36px)) var(--oy, 48px));
+    visibility: visible;
+    transition: clip-path .88s cubic-bezier(.22, 1, .36, 1), visibility 0s;
+  }
+
+  .mmenu__nav { flex: 1; }
+  .mmenu__list {
+    display: flex;
+    flex-direction: column;
+    gap: .22em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: min(48px, 13vw);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.03em;
+  }
+
+  /* Пункты по очереди всплывают снизу из размытия (шаг 70 мс) */
+  .mmenu__item {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(12px);
+  }
+  .mmenu.is-open .mmenu__item {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+    transition:
+      opacity .8s cubic-bezier(.22, 1, .36, 1),
+      transform .8s cubic-bezier(.22, 1, .36, 1),
+      filter .8s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: calc(.24s + var(--i) * .07s);
+  }
+  .mmenu.is-closing .mmenu__item {
+    opacity: 0;
+    transform: translateY(-10px);
+    filter: blur(8px);
+    transition: opacity .28s cubic-bezier(.4, 0, 1, 1), transform .28s cubic-bezier(.4, 0, 1, 1), filter .28s cubic-bezier(.4, 0, 1, 1);
+  }
+  .mmenu__item a {
+    display: inline-flex;
+    align-items: baseline;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mmenu__num {
+    display: inline-block;
+    flex: none;
+    width: 34px;
+    font-size: max(11px, .2em);
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: rgb(255 255 255 / .5);
+    font-variant-numeric: tabular-nums;
+    transform: translateY(-.9em);
+  }
+
+  /* Внизу: линия раскрывается слева направо, затем подпись */
+  .mmenu__line {
+    display: block;
+    height: 1px;
+    margin-bottom: 20px;
+    background: rgb(255 255 255 / .14);
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+  }
+  .mmenu__note {
+    font-size: 14px;
+    color: rgb(255 255 255 / .55);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .mmenu.is-open .mmenu__line {
+    transform: scaleX(1);
+    opacity: 1;
+    transition: transform .8s cubic-bezier(.22, 1, .36, 1) .5s, opacity .8s cubic-bezier(.22, 1, .36, 1) .5s;
+  }
+  .mmenu.is-open .mmenu__note {
+    opacity: 1;
+    transform: none;
+    transition: opacity .64s cubic-bezier(.22, 1, .36, 1) .6s, transform .64s cubic-bezier(.22, 1, .36, 1) .6s;
+  }
+  .mmenu.is-closing .mmenu__line,
+  .mmenu.is-closing .mmenu__note { opacity: 0; transition: opacity .24s cubic-bezier(.4, 0, 1, 1); }
+  .intro { gap: 16px; }
+  .intro__title { font-size: 32px; }
+  .intro__lead { font-size: 17px; }
+  .intro__lead br { display: none; }
+  .tags { gap: 8px; }
+  .tag { padding: 6px 14px; font-size: 13px; }
+  .activity { grid-template-columns: 1fr; }
+  .activity__card { padding: 16px; }
+  .activity__card--article { padding: 16px; }
+  .activity__card--article .activity__text { padding-left: 8px; padding-right: 8px; }
+  .activity__text { padding: 12px 8px 8px; }
+  .activity__shot { height: 320px; }
+  .cine__label { left: 20px; bottom: 20px; }
+  .cine__label--play img { width: 84px; height: auto; }
+  .cine__label--pause { font-size: 60px; line-height: 44px; height: 44px; }
+  .activity__title { font-size: 20px; }
+  .site-footer .nav__right { flex-wrap: wrap; gap: 16px 24px; }
+  .site-footer__copy { order: 2; } /* сначала ссылки, под ними «© Made by…» */
+  .site-footer .nav__links { flex-wrap: wrap; gap: 16px 24px; }
+  .section { padding-top: 24px; padding-bottom: 24px; gap: 28px; } /* между блоками 48px */
+  .section__title { font-size: 28px; line-height: 34px; }
+  .cases { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-rows: 360px; }
+  .case--tall, .case--school, .case--ds, .case--wide { grid-column: auto; grid-row: auto; }
+  .case { padding: 24px; }
+  .case__title { font-size: 20px; }
+  .job__body { flex-direction: column; align-items: flex-start; }
+  .job__about { width: auto; }
+
+  .case-hero { padding-top: 32px; padding-bottom: 24px; gap: 24px; }
+  /* баннер выше; цифра конверсии (School fees, Home contents) — под баннером */
+  .case-hero__top { display: contents; }
+  .case-hero__head { order: 1; }
+  .case-hero__media { order: 2; aspect-ratio: auto !important; height: 250px; }
+  .case-hero__media--mobile { aspect-ratio: 776 / 500 !important; height: auto; } /* свой мобильный баннер — по его пропорциям, без обрезки */
+  .case-hero .facts { order: 3; }
+  .case-hero__meta { font-size: 16px; }
+  .case-hero__title { font-size: 28px; }
+  .case-hero__title br { display: none; }
+  .story__row, .next-case__right { font-size: 16px; }
+  /* на телефоне видео сверху, подпись под ним — иначе текст ложится на ролик */
+  .flow__media { height: auto; padding: 0; }
+  .flow__video { position: relative; left: auto; width: 100%; height: auto; }
+  .flow__media::after { display: none; }
+  .flow__caption { padding: 16px 20px 20px; }
+  .flow__text br { display: none; }
+  .flow__label { font-size: 20px; }
+  .flow__text { font-size: 16px; }
+  .story__row { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .flows { flex-direction: column; gap: 32px; }
+  .principles { grid-template-columns: 1fr; gap: 32px; }
+  .lm-row { flex-direction: column; }
+  .lm-landing { flex: none; }
+  .lm-landing img { left: auto; right: 24px; }
+  .lm-personas { flex: none; height: 400px; }
+  .lm-personas__text { right: 21.67px; width: auto; }
+  .lm-personas__text br { display: none; }
+  /* на телефоне лесенка компактнее и начинается от левого края (перебивает координаты из макета) */
+  .lm-personas .persona { width: 260px; height: auto; }
+  .lm-personas .persona:nth-of-type(1) { left: 16px !important; top: 150px !important; }
+  .lm-personas .persona:nth-of-type(2) { left: 40px !important; top: 180px !important; }
+  .lm-personas .persona:nth-of-type(3) { left: 64px !important; top: 210px !important; }
+  .lm-personas .persona:nth-of-type(4) { left: 88px !important; top: 240px !important; }
+  .lm-personas .persona:nth-of-type(5) { left: 112px !important; top: 270px !important; }
+  .drafts { flex-direction: column; height: auto; }
+  .section:has(.drafts) .section__hint { display: none; }
+  .draft { flex-direction: column; align-items: stretch; flex: none; cursor: default; }
+  .draft__body { flex: none; height: auto; }
+  .draft__cons { grid-template-rows: 1fr; opacity: 1; } /* на телефоне карточки не сворачиваются */
+  .draft__media { order: -1; flex: none; height: 220px; margin: 16px 16px 0; border-radius: 16px; opacity: 1; transform: none; }
+  .draft__media img { left: 0; width: 100%; height: 100%; }
+  .slider { flex-direction: column-reverse; gap: 24px; padding: 20px; }
+  .slider__media { flex: none; height: auto; aspect-ratio: 16 / 9; }
+  .slider__img { width: 100%; height: 100%; object-fit: cover; }
+  .slide__title { font-size: 20px; }
+  .slide__text  { font-size: 16px; }
+  .principle { font-size: 16px; }
+  .principle__media { height: 220px; }
+  .section__lead { font-size: 16px; }
+
+  /* Блок истории: пункт в центре экрана яркий, соседние бледнее (по мотивам Framer ScrollTextFade).
+     Прозрачность и масштаб выставляет assets/js/story-fade.js */
+  .story.is-fading .story__row {
+    transform-origin: left center;
+    transition: opacity .2s ease, transform .2s ease;
+    will-change: opacity, transform;
+  }
+  .next-case__card { flex-direction: column; align-items: flex-start; padding: 24px; }
+  .next-case__peek { display: none; } /* на телефоне нет ховера */
+  .next-case__title { font-size: 20px; }
+  .next-case__right { width: 100%; }
+}
+
+/* Анимация бургера (используется в мобильной версии) */
+@keyframes burger-top-open  { 0% { transform: none; } 50% { transform: rotate(0) translateY(7px); } 100% { transform: rotate(45deg) translateY(7px); } }
+@keyframes burger-bot-open  { 0% { transform: none; } 50% { transform: rotate(0) translateY(-7px); } 100% { transform: rotate(-45deg) translateY(-7px); } }
+@keyframes burger-mid-open  { 0% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes burger-top-close { 0% { transform: rotate(45deg) translateY(7px); } 50% { transform: rotate(0) translateY(7px); } 100% { transform: none; } }
+@keyframes burger-bot-close { 0% { transform: rotate(-45deg) translateY(-7px); } 50% { transform: rotate(0) translateY(-7px); } 100% { transform: none; } }
+@keyframes burger-mid-close { 0%, 50% { opacity: 0; } 100% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .mmenu, .mmenu.is-open, .mmenu__item, .mmenu__line, .mmenu__note { transition-duration: .01s !important; transition-delay: 0s !important; }
+  .nav__burger path { animation-duration: .01s !important; }
+}
