@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Дизайн-система — кейс · Анастасия Гаращенко</title>
+  <meta name="description" content="Компоненты веба и мобильного приложения, документация и база знаний в Claude">
+  <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="../assets/img/favicon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+  <!-- Превью для соцсетей и мессенджеров: картинка и адрес должны быть полными (https://…) -->
+  <meta property="og:url" content="https://mephisushka.github.io/portfolio/cases/design-system.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Анастасия Гаращенко — портфолио">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Дизайн-система, которой можно задать вопрос">
+  <meta property="og:description" content="Компоненты веба и мобильного приложения, документация и база знаний в Claude">
+  <meta property="og:image" content="https://mephisushka.github.io/portfolio/assets/img/og/design-system.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="theme-v2">
+  <header class="nav">
+    <a class="nav__person" href="../index.html">
+      <span class="nav__avatar"><img src="../assets/img/avatar.jpg" alt=""></span>
+      <span class="nav__name">Гаращенко<br>Анастасия</span>
+    </a>
+    <nav class="nav__right">
+      <div class="nav__links">
+        <a href="mailto:a89168034675@gmail.com">Email<img class="nav__icon" src="../assets/img/icon-mail.svg" width="24" height="24" alt=""></a>
+        <a href="https://t.me/Mephiss_S" target="_blank" rel="noopener">Telegram<img class="nav__icon" src="../assets/img/icon-arrow-up-right.svg" width="24" height="24" alt=""></a>
+        <a href="https://max.ru/u/f9LHodD0cOJ-IGME94dxVK6SkEU_ODadmDoRHAh8buhZZ9mriXe9u9oREU0" target="_blank" rel="noopener">MAX<img class="nav__icon" src="../assets/img/icon-arrow-up-right.svg" width="24" height="24" alt=""></a>
+      </div>
+      <a class="nav__cv" href="../assets/cv.pdf" download="Резюме — Senior Product Designer.pdf">СV.pdf<img class="nav__icon" src="../assets/img/download.svg" width="24" height="24" alt=""></a>
+      <button class="nav__burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mmenu">
+        <!-- иконка из sources/ui-menu-bars-3-h-24-Regular.svg: каждая линия — отдельный путь, чтобы превращать бургер в крестик -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path class="burger__top" d="M3.75 4.25C3.33579 4.25 3 4.58579 3 5C3 5.41421 3.33579 5.75 3.75 5.75H20.25C20.6642 5.75 21 5.41421 21 5C21 4.58579 20.6642 4.25 20.25 4.25H3.75Z"/>
+          <path class="burger__mid" d="M3 12C3 11.5858 3.33579 11.25 3.75 11.25H20.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75H3.75C3.33579 12.75 3 12.4142 3 12Z"/>
+          <path class="burger__bot" d="M3 19C3 18.5858 3.33579 18.25 3.75 18.25H20.25C20.6642 18.25 21 18.5858 21 19C21 19.4142 20.6642 19.75 20.25 19.75H3.75C3.33579 19.75 3 19.4142 3 19Z"/>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="case-hero">
+      <div class="case-hero__head">
+        <p class="case-hero__meta">QIC • Дизайн-система • Веб и мобильное приложение</p>
+        <h1 class="case-hero__title">Дизайн-система, которой можно задать вопрос</h1>
+      </div>
+
+      <div class="case-hero__media case-hero__media--mobile" style="aspect-ratio: 1240 / 400;">
+        <video width="2480" height="800" muted loop playsinline autoplay preload="auto">
+          <source src="../assets/video/design-system-banner-mobile.mp4" media="(max-width: 720px)" type="video/mp4"><!-- мобильный баннер 776×500 -->
+          <source src="../assets/video/design-system-banner.mp4" type="video/mp4">
+        </video>
+      </div>
+    </section>
+
+    <section class="section">
+      <dl class="story story--narrow">
+        <div class="story__row">
+          <dt>Контекст</dt>
+          <dd>
+            <p>У нас есть Веб и Мобильное приложение, у каждой платформы своя дизайн-система. Мы решили объединить их, насколько это возможно + дать дизайнерам / разработчикам / аналитикам возможность быстро находить нужный компонент</p>
+          </dd>
+        </div>
+        <div class="story__row">
+          <dt>Проблема</dt>
+          <dd>
+            <p>Дизайн-системы каждой платформы собирались разными людьми и в разное время, большое количество разношерстных стилей и компонентов. Описание компонентов занимало много времени</p>
+          </dd>
+        </div>
+        <div class="story__row">
+          <dt>Что сделала</dt>
+          <dd>
+            <p>1. Создала скилл - главный документ-правило для Клода.</p>
+            <p>2. Загрузила в Клод существующую документацию по компонентам, привела все к единому виду</p>
+            <p>3. Затестила первый результат тем, что попросила его описать остальные компоненты. Внесла корректировки. Много корректировок</p>
+            <p>4. Спустя время провела интервью со всеми дизайнерами, собрала фидбек</p>
+          </dd>
+        </div>
+        <div class="story__row">
+          <dt>Результат</dt>
+          <dd>
+            <p>Исходя из интервью с дизайнерами выявила, что люди стали чаще обращаться к Клоду за поиском информации и стали быстрее решать свои задачи, не дожидаясь ответа от коллег</p>
+          </dd>
+        </div>
+        <div class="story__row">
+          <dt>Как развивать</dt>
+          <dd>
+            <p>Планировали объединять эту базу знаний с кодом у разработчиков. Чтобы любые согласованные изменения сразу прокидывались в код. Командам оставалось бы только проверка и корректировка</p>
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="section">
+      <h2 class="section__title">Принципы системы, прописанные в скилле</h2>
+      <!-- Слайдер по мотивам Framer Flexible Accordion: текст сменяется «уход вверх → появление снизу», картинки — плавным наплывом -->
+      <div class="slider" aria-roledescription="карусель" aria-label="Принципы системы">
+        <div class="slider__body">
+          <div class="slider__slides" aria-live="polite">
+            <div class="slide is-active" role="group" aria-roledescription="слайд" aria-label="1 из 5">
+              <h3 class="slide__title">Цель</h3>
+              <div class="slide__text"><p>Единый опыт на вебе и в мобильном приложении.<br>Приоритеты: консистентность ⭢ простота ⭢ масштабируемость ⭢ скорость ⭢ визуальная уникальность</p></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="слайд" aria-label="2 из 5" aria-hidden="true" inert>
+              <h3 class="slide__title">Трехуровневая система цвета</h3>
+              <div class="slide__text"><p>Базовая палитра ⭢ семантические токены ⭢ токены компонентов (для обеих платформ)</p><p>Базовые цвета в компонентах использовать запрещено</p></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="слайд" aria-label="3 из 5" aria-hidden="true" inert>
+              <h3 class="slide__title">Охват платформ</h3>
+              <div class="slide__text"><p>У каждой платформы свои шрифты. Отдельно придуманы правила для арабского языка, смешивать токены и шрифты платформ запрещено</p></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="слайд" aria-label="4 из 5" aria-hidden="true" inert>
+              <h3 class="slide__title">Три режима работы с компонентами</h3>
+              <div class="slide__text"><p>Если есть компонент — используй его</p><p>Компонент частично подходит — расширяй его, сохраняя токены и визуальный стиль</p><p>Нет нужного компонента — создай новый из токенов и объясни, почему существующие не подошли</p></div>
+            </div>
+            <div class="slide" role="group" aria-roledescription="слайд" aria-label="5 из 5" aria-hidden="true" inert>
+              <h3 class="slide__title">Порядок работы для ИИ</h3>
+              <div class="slide__text"><p>Перед любой задачей ассистент читает файлы в строгом порядке: типографика ⭢ токены ⭢ эффекты ⭢ документация компонента. Это гарантирует, что он отвечает по правилам системы, а не придумывает свое</p></div>
+            </div>
+          </div>
+          <div class="slider__nav">
+            <button class="slider__btn" type="button" data-dir="-1" aria-label="Предыдущий принцип"><img src="../assets/img/slider-prev.svg" width="32" height="32" alt=""></button>
+            <button class="slider__btn" type="button" data-dir="1" aria-label="Следующий принцип"><img src="../assets/img/slider-next.svg" width="32" height="32" alt=""></button>
+          </div>
+        </div>
+        <div class="slider__media">
+          <img class="slider__img is-active" src="../assets/img/ds-principle-goal.png" width="2480" height="1400" alt="Кнопка на вебе и в мобильном приложении выглядит одинаково">
+          <img class="slider__img" src="../assets/img/ds-principle-color.png" width="2480" height="1400" alt="Три уровня цветовых токенов" loading="lazy">
+          <img class="slider__img" src="../assets/img/ds-principle-platforms.png" width="2480" height="1400" alt="Шрифты и правила для разных платформ" loading="lazy">
+          <img class="slider__img" src="../assets/img/ds-principle-modes.png" width="2480" height="1400" alt="Три режима работы с компонентами" loading="lazy">
+          <img class="slider__img" src="../assets/img/ds-principle-ai-order.png" width="2480" height="1400" alt="Порядок чтения файлов ассистентом" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title">Как описываются компоненты</h2>
+        <p class="section__lead">Есть 2 шаблона документаций: Веб и мобильное приложение. Прежде чем писать документацию, <br>ассистент уточняет, для какой платформы она нужна</p>
+      </div>
+      <div class="principles principles--docs">
+        <figure class="principle">
+          <div class="principle__media principle__media--video">
+            <video src="../assets/video/design-system-doc-web.mp4" width="1200" height="600" muted loop playsinline autoplay preload="metadata" aria-label="Документация компонента Button для веба"></video>
+          </div>
+          <figcaption>Документация для веба включает: анатомию, размеры, вариации этого компонента, стейты и правила</figcaption>
+        </figure>
+        <figure class="principle">
+          <div class="principle__media principle__media--video">
+            <video src="../assets/video/design-system-doc-app.mp4" width="1200" height="600" muted loop playsinline autoplay preload="metadata" aria-label="Документация компонента для мобильного приложения"></video>
+          </div>
+          <figcaption>Документация для мобильных компонентов включает анатомию, touch target, haptic-отклик, различия iOS и Android</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section next-case">
+      <p class="next-case__label">Следующий кейс</p>
+      <a class="next-case__card" href="home-contents.html">
+        <div class="next-case__peek next-case__peek--mini" style="left: 34.8%; top: -18px;" aria-hidden="true">
+          <div class="mini-card">
+            <img class="mini-card__shot mini-card__shot--home" src="../assets/img/mini-home-contents.png" width="300" height="241" alt="">
+            <div class="mini-card__text">
+              <p class="mini-card__title">Home contents: изменение подхода к продаже страховки</p>
+              <p class="mini-card__desc">Помогаю юзеру оценить свое имущество прямо на лендинге</p>
+            </div>
+          </div>
+        </div>
+        <p class="next-case__title">Home contents: изменение<br>подхода к продаже страховки</p>
+        <div class="next-case__right">
+          <p>Помогаю юзеру оценить свое имущество прямо на лендинге</p>
+          <img src="../assets/img/arrow-right.svg" width="24" height="24" alt="">
+        </div>
+      </a>
+    </section>
+
+  </main>
+
+  <img class="divider" src="../assets/img/divider.svg" width="1312" height="1" alt="">
+
+  <footer class="site-footer">
+    <p class="site-footer__copy">© Made by Anastasia Garashchenko, 2026</p>
+    <nav class="nav__right">
+      <div class="nav__links">
+        <a href="mailto:a89168034675@gmail.com">Email<img class="nav__icon" src="../assets/img/icon-mail.svg" width="24" height="24" alt=""></a>
+        <a href="https://t.me/Mephiss_S" target="_blank" rel="noopener">Telegram<img class="nav__icon" src="../assets/img/icon-arrow-up-right.svg" width="24" height="24" alt=""></a>
+        <a href="https://max.ru/u/f9LHodD0cOJ-IGME94dxVK6SkEU_ODadmDoRHAh8buhZZ9mriXe9u9oREU0" target="_blank" rel="noopener">MAX<img class="nav__icon" src="../assets/img/icon-arrow-up-right.svg" width="24" height="24" alt=""></a>
+      </div>
+      <a class="nav__cv" href="../assets/cv.pdf" download="Резюме — Senior Product Designer.pdf">СV.pdf<img class="nav__icon" src="../assets/img/download.svg" width="24" height="24" alt=""></a>
+    </nav>
+  </footer>
+
+  <script>
+    // Ролики флоу подгружаются заранее, на подходе к блоку (видно первый кадр),
+    // а играют только пока на карточку наведён курсор. На тач-экранах — по тапу.
+    const videos = document.querySelectorAll('.flow__video');
+
+    const load = v => { if (!v.src) { v.preload = 'auto'; v.src = v.dataset.src; } };
+
+    const loader = new IntersectionObserver(entries => {
+      entries.forEach(({ target: v, isIntersecting }) => {
+        if (!isIntersecting) return;
+        load(v);
+        loader.unobserve(v);
+      });
+    }, { rootMargin: '800px 0px' });
+
+    const play = v => { load(v); v.play().catch(() => {}); };
+    const stop = v => { v.pause(); v.currentTime = 0; };
+
+    // На устройствах с мышью — играет, пока наведён курсор (или карточка в фокусе с клавиатуры).
+    // На тач-экранах наведение и фокус не используются: тап запускает, повторный тап ставит на паузу,
+    // запуск одной карточки останавливает другую. (Раньше телефон присылал «фокус» и «клик» подряд,
+    // и видео стартовало и тут же вставало на паузу.)
+    const canHover = () => matchMedia('(hover: hover)').matches;
+    videos.forEach(v => {
+      loader.observe(v);
+      const media = v.closest('.flow__media');
+      media.addEventListener('mouseenter', () => { if (canHover()) play(v); });
+      media.addEventListener('mouseleave', () => { if (canHover()) stop(v); });
+      media.addEventListener('focus', () => { if (canHover()) play(v); });
+      media.addEventListener('blur', () => { if (canHover()) stop(v); });
+      media.addEventListener('click', () => {
+        if (canHover()) return;
+        if (v.paused) {
+          videos.forEach(o => { if (o !== v) o.pause(); });
+          play(v);
+        } else {
+          v.pause();
+        }
+      });
+    });
+
+    // Слайдер принципов (по мотивам Framer Flexible Accordion).
+    // Текст: старый уходит вверх и гаснет, затем новый поднимается снизу.
+    // Картинки сменяются одновременно — плавный наплыв с лёгким уменьшением.
+    document.querySelectorAll('.slider').forEach(slider => {
+      const slides = [...slider.querySelectorAll('.slide')];
+      const imgs = [...slider.querySelectorAll('.slider__img')];
+      const TEXT_OUT = 385, IMG_OUT = 550; // мс, как в оригинале (0,55 с × 0,7 для текста)
+      let current = 0, timer;
+
+      const go = next => {
+        next = (next + slides.length) % slides.length;
+        if (next === current) return;
+        const prevSlide = slides[current], prevImg = imgs[current];
+        clearTimeout(timer);
+        slides.forEach(s => s.classList.remove('is-leaving'));
+
+        prevSlide.classList.replace('is-active', 'is-leaving');
+        prevSlide.setAttribute('aria-hidden', 'true'); prevSlide.inert = true;
+        prevImg.classList.replace('is-active', 'is-leaving');
+        setTimeout(() => prevImg.classList.remove('is-leaving'), IMG_OUT);
+
+        imgs[next].classList.add('is-active');
+        const nextSlide = slides[next];
+        timer = setTimeout(() => {
+          prevSlide.classList.remove('is-leaving');
+          nextSlide.classList.add('is-active');
+          nextSlide.removeAttribute('aria-hidden'); nextSlide.inert = false;
+        }, TEXT_OUT);
+        current = next;
+      };
+
+      slider.querySelectorAll('.slider__btn').forEach(btn =>
+        btn.addEventListener('click', () => go(current + Number(btn.dataset.dir))));
+
+      // свайп по картинке на тач-экранах
+      const media = slider.querySelector('.slider__media');
+      let x0 = null;
+      media.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+      media.addEventListener('touchend', e => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0; x0 = null;
+        if (Math.abs(dx) > 40) go(current + (dx < 0 ? 1 : -1));
+      });
+    });
+  </script>
+  <!-- Мобильное меню (по мотивам Framer Motion Overlay Menu): тёмный экран раскрывается кругом от кнопки -->
+  <div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Контакты" tabindex="-1">
+    <nav class="mmenu__nav" aria-label="Контакты">
+      <ul class="mmenu__list">
+        <li class="mmenu__item" style="--i: 0"><a href="mailto:a89168034675@gmail.com"><span class="mmenu__num" aria-hidden="true">01</span>Email</a></li>
+        <li class="mmenu__item" style="--i: 1"><a href="https://max.ru/u/f9LHodD0cOJ-IGME94dxVK6SkEU_ODadmDoRHAh8buhZZ9mriXe9u9oREU0" target="_blank" rel="noopener"><span class="mmenu__num" aria-hidden="true">02</span>MAX</a></li>
+        <li class="mmenu__item" style="--i: 2"><a href="https://t.me/Mephiss_S" target="_blank" rel="noopener"><span class="mmenu__num" aria-hidden="true">03</span>Telegram</a></li>
+      </ul>
+    </nav>
+    <div class="mmenu__footer">
+      <span class="mmenu__line" aria-hidden="true"></span>
+      <p class="mmenu__note">© Made by Anastasia Garashchenko, 2026</p>
+    </div>
+  </div>
+  <script src="../assets/js/menu.js"></script>
+  <script src="../assets/js/story-fade.js"></script>
+</body>
+</html>
