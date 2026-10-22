@@ -377,11 +377,11 @@ img, video { display: block; max-width: 100%; }
   height: 100%;
   object-fit: cover;
 }
-.case__video:not([src]) { display: none; }
+.case__video:not([src]):not(:has(source)) { display: none; }
 
 /* Растворение низа плитки с видео в фон страницы */
-.case:has(.case__video[src])::before,
-.case:has(.case__video[src])::after {
+.case:has(.case__video[src], .case__video source)::before,
+.case:has(.case__video[src], .case__video source)::after {
   content: "";
   position: absolute;
   inset: auto 0 0;
@@ -391,7 +391,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 /* Размытие, которое плавно нарастает книзу */
-.case:has(.case__video[src])::before {
+.case:has(.case__video[src], .case__video source)::before {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   mask-image: linear-gradient(to top, #000 35%, transparent);
@@ -399,7 +399,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 /* Заливка цветом фона поверх размытия */
-.case:has(.case__video[src])::after {
+.case:has(.case__video[src], .case__video source)::after {
   background: linear-gradient(to top,
     var(--bg) 25%,
     color-mix(in srgb, var(--bg) 85%, transparent) 50%,
